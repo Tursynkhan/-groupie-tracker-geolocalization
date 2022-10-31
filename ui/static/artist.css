@@ -124,15 +124,23 @@ h2{
     padding-bottom: 3px;
 }
 .footer{
-    margin: 25px 0;
+    width: 800px;
+    margin:25px auto;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .undo{
+    margin-top: 30px;
     border-radius: 5px;
     background-color: rgb(245,245,245);
     padding: 10px 15px;
     border: 1px #202329 solid;
+}
+.map{
+    width: 600px;
+    height: 400px;
 }
 .all-artist{
     text-decoration: none;
@@ -178,6 +186,10 @@ h2{
     .date{
         font-size: 16px;
     }
+    .map{
+        width: 600px;
+        height: 350px;
+    }
 }
 @media screen and (max-width:768px) {
    
@@ -211,6 +223,16 @@ h2{
     }
     .date{
         font-size: 14px;
+    }
+    .footer{
+        width: 700px;
+    }
+    .footer{
+        width: 500px;
+    }
+    .map{
+        width: 400px;
+        height: 200px;
     }
     .all-artist{
         font-size: 16px;
@@ -257,5 +279,12 @@ h2{
     }
     .all-artist{
         font-size: 16px;
+    }
+    .footer{
+        width: 300px;
+    }
+    .map{
+        width: 250px;
+        height: 250px;
     }
 }

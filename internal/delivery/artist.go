@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"log"
+	"main/internal/service"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -31,19 +32,20 @@ func (h *Handler) artist(w http.ResponseWriter, r *http.Request) {
 
 	idUrl := strconv.Itoa(id)
 
-	res1, err := h.service.IdArtist(idUrl)
+	Artist, err := h.service.IdArtist(idUrl)
 	if err != nil {
 		h.ErrorHandler(w, r, errStatus{http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError)})
 		return
 	}
-	res2, err := h.service.Relations(idUrl)
+	Relation, err := h.service.Relations(idUrl)
 	if err != nil {
 		h.ErrorHandler(w, r, errStatus{http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError)})
 		return
 	}
-	res1.DatesLocation = res2.DatesLocations
+	Artist.DatesLocation = Relation.DatesLocations
 
-	err = ts.Execute(w, res1)
+	Artist.Coords = service.GetCoordOfCity(Artist.DatesLocation)
+	err = ts.Execute(w, Artist)
 	if err != nil {
 		log.Println(err.Error())
 		h.ErrorHandler(w, r, errStatus{http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError)})
