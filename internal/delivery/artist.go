@@ -37,6 +37,10 @@ func (h *Handler) artist(w http.ResponseWriter, r *http.Request) {
 		h.ErrorHandler(w, r, errStatus{http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError)})
 		return
 	}
+	if Artist.Id == 0 {
+		h.ErrorHandler(w, r, errStatus{http.StatusNotFound, http.StatusText(http.StatusNotFound)})
+		return
+	}
 	Relation, err := h.service.Relations(idUrl)
 	if err != nil {
 		h.ErrorHandler(w, r, errStatus{http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError)})
